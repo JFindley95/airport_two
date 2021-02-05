@@ -37,6 +37,7 @@ require 'weather.rb'
      expect { airport.land_plane(plane1) }.to raise_error("you can not land due to stormy weather")
      end
    end
+   
      context 'when the weather is stormy and max capacity has been reached' do
      it 'will not allow landing' do
      srand(1)
@@ -59,6 +60,7 @@ require 'weather.rb'
       airport.plane_take_off(plane3)
       expect(airport.hangar).not_to include("BA678")
       end
+
     context 'when the weather is stormy' do
       it 'will NOT allow a plane to take off' do
       srand(1)
