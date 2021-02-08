@@ -32,14 +32,13 @@ require 'weather.rb'
      end
 
      context 'when the weather is stormy and max capacity has been reached' do
-       let(:weather)  { double :weather, status: 'stormy' }
          it 'will not allow landing' do
-         airport.weather
-         airport.hangar << (plane1)
-         airport.hangar << (plane2)
-         airport.hangar << (plane3)
-         airport.hangar << (plane1)
-         airport.hangar << (plane2)
+         airport.land_plane(plane1)
+         airport.land_plane(plane2)
+         airport.land_plane(plane3)
+         airport.land_plane(plane1)
+         airport.land_plane(plane2)
+         allow(weather).to receive(:status) {'stormy'}
          expect { airport.land_plane(plane1) }.to raise_error("you can not land due to stormy conditions. Aiport is also full")
          end
        end
@@ -54,10 +53,10 @@ require 'weather.rb'
       end
 
     context 'when the weather is stormy' do
-      let(:weather)  { double :weather, status: 'stormy' }
       it 'will NOT allow a plane to take off' do
-      airport.hangar << (plane1)
-      airport.hangar << (plane2)
+      airport.land_plane(plane1)
+      airport.land_plane(plane2)
+      allow(weather).to receive(:status) {'stormy'}
       expect { airport.plane_take_off(plane2) }.to raise_error("you can not fly due to bad weather")
       end
     end
