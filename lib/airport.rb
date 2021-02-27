@@ -1,5 +1,6 @@
 require 'weather.rb'
 
+
 class Airport
 
   attr_reader :hangar, :weather
